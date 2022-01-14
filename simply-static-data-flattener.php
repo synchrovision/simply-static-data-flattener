@@ -59,7 +59,9 @@ add_action('ss_finished_fetching_pages',function(){
 	$url_to_replace=Data_Flattener::get_url_to_replace($archive_dir,$files_to_move);
 	$original_destination_url_type=$ss_options->get('original_destination_url_type');
 	$dummy_url=Data_Flattener::get_dummy_url();
+	do_action('ssdf_before_replace_dummy_url',$files_to_replace_url,$dummy_url,$url_to_replace,$original_destination_url_type);
 	foreach($files_to_replace_url as $file){
+		if(!file_exists($file)){continue;}
 		$contents=strtr(file_get_contents($file),$url_to_replace);
 		switch($original_destination_url_type){
 			case 'offline':
@@ -79,4 +81,5 @@ add_action('ss_finished_fetching_pages',function(){
 		}
 		file_put_contents($file,$contents);
 	}
+	$ss_options->set('destination_url_type',$original_destination_url_type);
 });
