@@ -72,11 +72,12 @@ add_action('ss_finished_fetching_pages',function(){
 				while(isset($path[1])){
 					array_pop($path);
 					$replacements[implode('/',$path).'/']=str_repeat('../',$deps-count($path));
+					$replacements[str_replace('/','\\/',implode('/',$path).'/')]=str_repeat('..\\/',$deps-count($path));
 				}
 				$contents=strtr($contents,$replacements);
 				break;
 			case 'relative':
-				$contents=str_replace($dummy_url,'',$contents);
+				$contents=str_replace([$dummy_url,str_replace('/','\\/',$dummy_url)],'',$contents);
 				break;
 		}
 		file_put_contents($file,$contents);
