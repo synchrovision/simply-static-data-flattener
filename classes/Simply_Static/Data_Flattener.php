@@ -44,6 +44,7 @@ class Data_Flattener{
 		$files=[];
 		$conflicted_assets=[];
 		foreach(['wp-includes','wp-content'] as $dirname){
+			if(!is_dir($dir.$dirname)){continue;}
 			$iterator=new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator($dir.$dirname));
 			foreach($iterator as $info){
 				$from=$info->getPathname();
