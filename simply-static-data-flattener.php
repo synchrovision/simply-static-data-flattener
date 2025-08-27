@@ -21,9 +21,9 @@ add_action('plugins_loaded',function(){
 
 
 /**
-before creating archive,
-set destination_url_type to absolute
-and remember was override it
+* before creating archive,
+* set destination_url_type to absolute
+* and remember was override it
 */
 add_action('ss_after_setup_task',function(){
 	$ss_options=Options::instance();
@@ -41,9 +41,9 @@ add_action('ss_after_setup_task',function(){
 });
 
 /**
-on finished fetching pages,
-move and rename files in wp-content or wp-includes of archive directory,
-and replace url in css or html files
+* on finished fetching pages,
+* move and rename files in wp-content or wp-includes of archive directory,
+* and replace url in css or html files
 */
 add_action('ss_finished_fetching_pages',function(){
 	$ss_options=Options::instance();
